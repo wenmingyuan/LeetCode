@@ -9,29 +9,26 @@
 //      若为空，则返回true
 //      若不为空，则返回false（左括号过多，没有相应右括号的情况）
 
-var isValid = function(s) {
-  var stack = new Array();
-  for (var i = 0; i < s.length; i++) {
-    if (s[i] === '(' || s[i] === '{' || s[i] === '[') {
-      stack.push(s[i]);
-    } else {
-      top = stack.pop();
-      if ((top === '(' && s[i] === ')') || (top === '{' && s[i] === '}') || (top === '[' && s[i] === ']')) {
-        continue;
-      } else {
-        return false;
-      }
-    }
-  }
-  if (stack.length === 0) {
-    return true;
-  } else {
-    return false;
-  }
-};
-
-s = '()[]{()'
-console.log(isValid(s));
+// var isValid = function(s) {
+//   var stack = new Array();
+//   for (var i = 0; i < s.length; i++) {
+//     if (s[i] === '(' || s[i] === '{' || s[i] === '[') {
+//       stack.push(s[i]);
+//     } else {
+//       top = stack.pop();
+//       if ((top === '(' && s[i] === ')') || (top === '{' && s[i] === '}') || (top === '[' && s[i] === ']')) {
+//         continue;
+//       } else {
+//         return false;
+//       }
+//     }
+//   }
+//   if (stack.length === 0) {
+//     return true;
+//   } else {
+//     return false;
+//   }
+// };
 
 // 根据博客改写：
 // 1. 若字符串长度是奇数，则直接返回false，节省时间
@@ -63,29 +60,32 @@ var isValid = function(s) {
   return !stack.length;
 };
 
+s = '()[]{()}'
+console.log(isValid(s));
+
 
 // 答案使用了Map：
-var isValid = function(s) {
-  const n = s.length;
-  if (n % 2 === 1) {
-      return false;
-  }
-  const pairs = new Map([
-      [')', '('],
-      [']', '['],
-      ['}', '{']
-  ]);
-  const stk = [];
-  for (let ch of s){
-      if (pairs.has(ch)) {
-          if (!stk.length || stk[stk.length - 1] !== pairs.get(ch)) {
-              return false;
-          }
-          stk.pop();
-      } 
-      else {
-          stk.push(ch);
-      }
-  };
-  return !stk.length;
-};
+// var isValid = function(s) {
+//   const n = s.length;
+//   if (n % 2 === 1) {
+//       return false;
+//   }
+//   const pairs = new Map([
+//       [')', '('],
+//       [']', '['],
+//       ['}', '{']
+//   ]);
+//   const stk = [];
+//   for (let ch of s){
+//       if (pairs.has(ch)) {
+//           if (!stk.length || stk[stk.length - 1] !== pairs.get(ch)) {
+//               return false;
+//           }
+//           stk.pop();
+//       } 
+//       else {
+//           stk.push(ch);
+//       }
+//   };
+//   return !stk.length;
+// };
