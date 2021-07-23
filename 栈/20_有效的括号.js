@@ -60,7 +60,7 @@ var isValid = function(s) {
   return !stack.length;
 };
 
-s = '()[]{()}'
+s = '()[]{}'
 console.log(isValid(s));
 
 
