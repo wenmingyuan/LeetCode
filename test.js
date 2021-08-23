@@ -1,6 +1,4 @@
-function getMax(a, b) {
-  return;
-}
+let map = new Map();
+map.set('(', ')');
 
-
-console.log(getMax(1,2));
+console.log(map.get('('));
