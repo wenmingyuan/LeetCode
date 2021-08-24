@@ -65,17 +65,52 @@ function ListNode(val, next) {
 /* 答案 迭代 比自己的方法要简单 值得学习 
   流程可参考：https://leetcode-cn.com/problems/swap-nodes-in-pairs/solution/24-liang-liang-jiao-huan-lian-biao-zhong-2kiy/
 */
+// var swapPairs = function(head) {
+//   const dummy = new ListNode(0);
+//   dummy.next = head;
+//   let p = dummy;
+//   while (p.next !== null && p.next.next !== null) {
+//       const a = p.next;
+//       const b = p.next.next;
+//       p.next = b;
+//       a.next = b.next;
+//       b.next = a;
+//       p = a;
+//   }
+//   return dummy.next;
+// }
+
+/* 自己看了答案后写的迭代 */
+// var swapPairs = function(head) {
+//   if (!head) return head;
+//   let dummy = new ListNode(0, head);
+//   let p = dummy, a = p.next, b = a.next;  // 不应该在这里赋值
+//   while (a && b) {
+//     p.next = b;
+//     a.next = b.next;
+//     b.next = a;
+//     p = a;
+//     // 和答案相比，下面我写的逻辑是混乱的
+//     a = a.next;
+//     if (!a) return dummy.next;
+//     b = a.next;
+//     if (!b) return dummy.next;
+//   }
+//   return dummy.next;
+// }
+
+
+/* 理解答案后优化自己的迭代 和答案一样 */
 var swapPairs = function(head) {
-  const dummy = new ListNode(0);
-  dummy.next = head;
-  let temp = dummy;
-  while (temp.next !== null && temp.next.next !== null) {
-      const node1 = temp.next;
-      const node2 = temp.next.next;
-      temp.next = node2;
-      node1.next = node2.next;
-      node2.next = node1;
-      temp = node1;
+  let dummy = new ListNode(0, head);
+  let p = dummy;
+  while (p.next && p.next.next) {
+    let a = p.next;
+    let b = a.next;
+    p.next = b;
+    a.next = b.next;
+    b.next = a;
+    p = a;
   }
   return dummy.next;
 }
