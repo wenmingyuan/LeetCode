@@ -110,6 +110,7 @@ var addTwoNumbers = function(l1, l2) {
 
 /*答案
   ---------------------------------------------------------
+  参考：https://www.bilibili.com/video/BV1wA411b7qZ?p=2
 */
 // var addTwoNumbers = function(l1, l2) {
 //   let dummy = new ListNode();

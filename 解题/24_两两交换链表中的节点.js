@@ -21,7 +21,9 @@ function ListNode(val, next) {
 // }
 
 
-/* 答案 递归 比我的代码简洁 应该学习 */
+/* 答案 递归 比我的代码简洁 应该学习 
+  参考：https://leetcode-cn.com/problems/swap-nodes-in-pairs/solution/liang-liang-jiao-huan-lian-biao-zhong-de-jie-di-91/
+*/
 // var swapPairs = function(head) {
 //   if (head === null|| head.next === null) {  // 我写了 3 个终止条件，实际上可以合并成这一句
 //       return head;
@@ -31,6 +33,7 @@ function ListNode(val, next) {
 //   newHead.next = head;
 //   return newHead;
 // }
+
 
 /* 自己按照答案再写一遍 */
 // var swapPairs = function(head) {
@@ -62,8 +65,10 @@ function ListNode(val, next) {
 //   return newHead;
 // }
 
+
 /* 答案 迭代 比自己的方法要简单 值得学习 
-  流程可参考：https://leetcode-cn.com/problems/swap-nodes-in-pairs/solution/24-liang-liang-jiao-huan-lian-biao-zhong-2kiy/
+  参考：https://leetcode-cn.com/problems/swap-nodes-in-pairs/solution/liang-liang-jiao-huan-lian-biao-zhong-de-jie-di-91/
+  流程图可参考：https://leetcode-cn.com/problems/swap-nodes-in-pairs/solution/24-liang-liang-jiao-huan-lian-biao-zhong-2kiy/
 */
 // var swapPairs = function(head) {
 //   const dummy = new ListNode(0);
@@ -79,6 +84,7 @@ function ListNode(val, next) {
 //   }
 //   return dummy.next;
 // }
+
 
 /* 自己看了答案后写的迭代 */
 // var swapPairs = function(head) {

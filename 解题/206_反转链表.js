@@ -16,7 +16,9 @@ function ListNode(val, next) {
 // }
 
 
-/* 答案的递归 我写麻烦了，根本不需要 while 循环找末尾结点，末尾结点已经有指针指向它了，直接用这个指针就行了 */
+/* 答案的递归 我写麻烦了，根本不需要 while 循环找末尾结点，末尾结点已经有指针指向它了，直接用这个指针就行了 
+  参考：https://leetcode-cn.com/problems/reverse-linked-list/solution/fan-zhuan-lian-biao-by-leetcode-solution-d1k2/
+*/
 // var reverseList = function(head) {
 //   if (head == null || head.next == null) {
 //       return head;
@@ -55,6 +57,7 @@ var reverseList = function(head) {
 
 
 /* 答案的迭代更简洁 
+  参考：https://leetcode-cn.com/problems/reverse-linked-list/solution/fan-zhuan-lian-biao-by-leetcode-solution-d1k2/
   答案比我的简洁的原因：
     把 null 当做一个结点来对待，直接创建一个指针指向 null，这样就和其他结点保持了一致性
     在 while 循环内创建某个指针，我是在循环外先定义了所有指针

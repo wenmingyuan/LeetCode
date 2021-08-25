@@ -51,7 +51,9 @@
 //   return !stack.length;
 // }
 
-/* 答案使用了 Map，并首先判断 s.length 是否为奇数 */
+/* 答案使用了 Map，并首先判断 s.length 是否为奇数
+  参考：https://leetcode-cn.com/problems/valid-parentheses/solution/you-xiao-de-gua-hao-by-leetcode-solution/
+*/
 // var isValid = function(s) {
 //   const n = s.length;
 //   if (n % 2 === 1) {

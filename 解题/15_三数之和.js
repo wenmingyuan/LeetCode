@@ -26,6 +26,7 @@ var threeSum = function(nums) {
 
 /* 看了答案思路后自己写的
   -------------------------------------------------------------------------------------------
+  参考：https://www.bilibili.com/video/BV1wA411b7qZ?p=5
   声明 result
   首先对 nums 进行升序排序
   遍历数组 从第 1 位到倒数第 3 位 将 nums[i] 作为固定数：
@@ -75,4 +76,5 @@ console.log(result);
   求和问题主要考虑 2 种方法：
     哈希表
     多指针
+  参考：https://leetcode-cn.com/problems/3sum/solution/yi-miao-jiu-neng-kan-dong-de-dong-tu-jie-unfp/
 */

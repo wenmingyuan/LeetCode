@@ -85,8 +85,8 @@
 
 
 /* 3. 答案的 自底向上 + 优化空间
+  参考：https://leetcode-cn.com/problems/fibonacci-number/solution/fei-bo-na-qi-shu-by-leetcode-solution-o4ze/
   改变变量的值的时候采用 滚动数组 的思想，比我使用 tmp 暂存变量好理解，值得学习
-  滚动数组图示：https://leetcode-cn.com/problems/fibonacci-number/solution/fei-bo-na-qi-shu-by-leetcode-solution-o4ze/
 */
 // var fib = function(n) {
 //   if (n < 2) {
@@ -119,7 +119,7 @@
 
 
 /* 4. 答案的 自底向上 + 未优化空间 
-  https://leetcode-cn.com/problems/fibonacci-number/solution/di-gui-dong-tai-gui-hua-by-cctt-2/
+  参考：https://leetcode-cn.com/problems/fibonacci-number/solution/di-gui-dong-tai-gui-hua-by-cctt-2/
 */
 // var fib = function(n) {
 //   let dp = [0, 1];
