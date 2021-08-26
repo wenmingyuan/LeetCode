@@ -31,13 +31,13 @@ function ListNode(val, next) {
 
 
 /* 根据答案自己优化的递归 和答案一样 */
-var reverseList = function(head) {
-  if (!head || !head.next) return head;
-  let newHead = reverseList(head.next);
-  head.next.next = head;
-  head.next = null;
-  return newHead;
-}
+// var reverseList = function(head) {
+//   if (!head || !head.next) return head;
+//   let newHead = reverseList(head.next);
+//   head.next.next = head;
+//   head.next = null;
+//   return newHead;
+// }
 
 
 /* 自己写的迭代 */
@@ -62,7 +62,16 @@ var reverseList = function(head) {
     把 null 当做一个结点来对待，直接创建一个指针指向 null，这样就和其他结点保持了一致性
     在 while 循环内创建某个指针，我是在循环外先定义了所有指针
     在循环结束时移动指针，我是在循环开始时移动指针
-    3 个指针不是同时移动，我的是同时移动
+  ---------------------------------------------------------------------------------------------
+  思考后发现，如何写出正确顺序的循环体语句，关键在于意识到 b 指针和 c 指针在每次进入循环前，要指向同一个位置！！！
+  而我写的代码很可能边界处出错，因为我的想法是让 c 指针永远在 b 指针后面一个位置。
+  所以在最后一次进入循环时，b 不为空，c 为空。然后还要将 b 和 c 都向后移一位，这时 c 就会出问题。
+  所以正确的做法是：
+    确保 b 和 c 在每次进入循环前处于同一个位置
+    进入循环后
+      先将 c 后移
+      题目相关的逻辑.......
+      将 b 后移
 */
 // var reverseList = function(head) {
 //   let a = null;
@@ -94,6 +103,38 @@ var reverseList = function(head) {
 //     b = c;
 //   }
 //   return a;
+// }
+
+
+/* 自己再写一遍迭代 熟练一下 */
+var reverseList = function(head) {
+  // let a = null, b = head, c = b;  可以把 c 写到循环体中
+  let a = null, b = head;
+  while (b) {
+    // c = c.next;  配合上面的优化
+    let c = b.next;
+    b.next = a;
+    a = b;
+    b = c;
+  }
+  return a;
+}
+
+
+/* 还可以用头插法 理解了头插法后自己写的  和答案一样  头插法也要掌握！在题目 92_反转链表 Ⅱ 中会用到！
+  参考：https://leetcode-cn.com/problems/reverse-linked-list/solution/di-gui-by-2359451d-ezo8/
+*/
+// var reverseList = function(head) {
+//   if (!head) return head;
+//   let dummy = new ListNode(0, head);
+//   let p = head, q = p.next;
+//   while (q) {
+//     p.next = q.next;
+//     q.next = dummy.next;
+//     dummy.next = q;
+//     q = p.next;
+//   }
+//   return dummy.next;
 // }
 
 
