@@ -40,9 +40,23 @@ var hasCycle = function(head) {
   if (!head) return false;
   let slow = head, fast = head.next;  // 假设快慢指针都从虚拟头结点出发，保持逻辑一致性
   while (fast && fast.next) {  // 快指针每次走两步，所以判断是否为空需要两个条件
-    if (slow === fast) return true;
+    // if (slow === fast) return true;  // 这句写到循环体最后更好一些，因为一开始 slow 和 fast 是不一样的
     slow = slow.next;
     fast = fast.next.next;
+    if (slow === fast) return true;
+  }
+  return false;
+}
+
+
+/* 在上面自己写的基础上修改一个地方，初始时令 fast = head，也可以通过 */
+var hasCycle = function(head) {
+  if (!head) return false;
+  let slow = head, fast = head;
+  while (fast && fast.next) {
+    slow = slow.next;
+    fast = fast.next.next;
+    if (slow === fast) return true;
   }
   return false;
 }
