@@ -137,6 +137,7 @@ var reverseList = function(head) {
 //   return dummy.next;
 // }
 
+/* 234_回文链表 我写的头插法和这道题不一样，但也通过了 */
 
 /* 测试 */
 // 创建第一个结点

@@ -53,7 +53,7 @@ var addTwoNumbers = function(l1, l2) {
 }
 
 
-/* 大概知道答案思路后自己写的，写的时候还没看答案代码  通过  
+/* 大概知道答案思路后自己写的，写的时候还没看答案代码  通过  自己写的太麻烦了，原因见上面的注释  
 */
 let getStack = function(ll) {
   let stack = [];
@@ -98,6 +98,42 @@ var addTwoNumbers = function(l1, l2) {
   for (let i = 0; i < longStack.length; i++) {  // 把数组变成链表
     p.next = new ListNode(longStack[i]);
     p = p.next;
+  }
+  return dummy.next;
+}
+
+
+/* 理解答案的代码后自己写的   和答案一样，区别在于答案的头插法更简洁，不需要 dummy
+  自己理顺流程：
+    1. 把 2 条链表的所有结点的值放到 2 个栈里
+    2. 循环以下步骤   循环条件：两个栈不都为空，或进位为 1（最后两个栈都空了，但还要进位的情况）
+      (1) 同时对 2 个栈进行弹栈，若一个栈为空，另一个栈不为空，则设定空栈取出的值为 0（为了保持加法运算位数一致）
+      (2) sum = val1 + val2 + carry
+      (3) 创建结点，结点的值为 sum % 10
+      (4) carry = Math.floor(sum / 10)
+      (5) 利用头插法将结点串入新链表
+    3. 返回新链表的 head
+*/
+var addTwoNumbers = function(l1, l2) {
+  let stack1 = [], stack2 = [];
+  while (l1) {
+    stack1.push(l1.val);
+    l1 = l1.next;
+  }
+  while (l2) {
+    stack2.push(l2.val);
+    l2 = l2.next;
+  }
+  let carry = 0;
+  let dummy = new ListNode();
+  while (stack1.length || stack2.length || carry) {
+    let val1 = stack1.length ? stack1.pop() : 0;
+    let val2 = stack2.length ? stack2.pop() : 0;
+    let sum = val1 + val2 + carry;
+    let node = new ListNode(sum % 10);
+    carry = Math.floor(sum / 10);
+    node.next = dummy.next;
+    dummy.next = node;
   }
   return dummy.next;
 }
