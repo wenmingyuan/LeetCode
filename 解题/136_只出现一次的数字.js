@@ -14,15 +14,15 @@
 //   }
 //   let result;
 //   map.forEach(function(value, key) {
-//     result = key;  // 直接在这里 return 不行，返回的是 undefined，不知道为什么
+//     result = key;  // 直接在这里 return 不行，forEach() 是 ES5 语法，return 并不是退出外层函数，建议用 ES6 的 for of
 //   });
 //   return result;
 // }
 
 /* 自己想到先排序再找，但是时间复杂度不符合题目要求 */
+
+
 /* 题目要求线性时间复杂度，且不使用额外空间 想不出思路 看答案了 */
-
-
 /* 答案 位运算-异或运算
   nums[0] ^ nums[1] ^ nums[2] ^... 的计算结果就是要找的数字（因为 0 ^ 要找的数字 = 要找的数字）（^ 为代码中的异或运算符）
   异或运算的性质：
