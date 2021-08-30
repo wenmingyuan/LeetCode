@@ -28,12 +28,14 @@
     “做标记” 的方法很多，答案中有 2 种方法：
       1. 元素值 + n
       2. 元素值加负号（我更喜欢这种方法）
-    注意：
+  ------------------------------------------------------------------------------------------------------
+    注意！！！！！特别容易出错！！！！！
       1. 如果元素已经被标记，那么不需要重复标记。
          例如采用加负号的方法做标记，重复标记就变成正数了，就有问题了。
          元素值 + n 的方法，答案是重复标记，因为最后只要判断元素是否大于 n 即可，重复加 n 没影响。
       2. 用 数组元素 去标记 对应索引位置的元素时，该数组元素可能已被标记，因此需要将其还原为未标记时的数值。
-    另外，答案都没有复原数组，这点我感到很无语。
+  ------------------------------------------------------------------------------------------------------
+    答案都没有复原数组，这点我感到很无语。
   参考： 
     元素值 + n：https://leetcode-cn.com/problems/find-all-numbers-disappeared-in-an-array/solution/zhao-dao-suo-you-shu-zu-zhong-xiao-shi-d-mabl/
     元素值加负号、Python 代码、动图：https://leetcode-cn.com/problems/find-all-numbers-disappeared-in-an-array/solution/yi-zhang-dong-tu-bang-zhu-li-jie-yuan-di-uign/
@@ -51,6 +53,33 @@ var findDisappearedNumbers = function(nums) {
     if (nums[i] > 0) result.push(i + 1);
   }
   return result;
+}
+
+
+/* 答案  交换元素的做法，不占用额外空间   没搞懂原理，先这样吧 
+  参考：https://leetcode-cn.com/problems/find-all-numbers-disappeared-in-an-array/solution/shou-hua-tu-jie-jiao-huan-shu-zi-zai-ci-kzicg/
+*/
+var findDisappearedNumbers = function(nums) {
+  let i = 0;
+  while (i < nums.length) {
+      if (nums[i] == i + 1) {
+          i++;
+          continue;
+      }
+      const idealIdx = nums[i] - 1;
+      if (nums[i] == nums[idealIdx]) {
+          i++;
+          continue;
+      }
+      [nums[idealIdx], nums[i]] = [nums[i], nums[idealIdx]];
+  }
+  const res = [];
+  for (let i = 0; i < nums.length; i++) {
+      if (nums[i] != i + 1) {        
+          res.push(i+1);
+      }   
+  }
+  return res;
 }
 
 
