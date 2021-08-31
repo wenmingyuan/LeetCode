@@ -70,6 +70,9 @@ MyStack.prototype.empty = function() {
 */
 
 
+/* 题目进阶要求均摊时间复杂度 O(1)   但题解里没有找到相应解法...  我也没想出来  */
+
+
 /* 测试 */
 var obj = new MyStack()
 obj.push(1)  // 测试的时候写成 obj.push(1,2,3) 了，发现结果不对，原因是 push() 是自己写的函数，只接收一个参数...
