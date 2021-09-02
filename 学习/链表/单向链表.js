@@ -32,7 +32,7 @@ function append(val) {
     //   那么可以用 cur.val = xxx 修改结点的值，可以用 cur.next = xxx 改变该结点的下一结点
     //   但是不能用 cur = node 改变该结点的下一结点
     //   感觉 cur 和 cur.val 很像C语言指针 p 和 *p 的区别
-    //   可以参考 https://www.cnblogs.com/html55/p/9765636.html 和 指针的问题.js
+    //   可以参考 https://www.cnblogs.com/html55/p/9765636.html
     // 所以需要改成 cur.next = node
   }
 }
