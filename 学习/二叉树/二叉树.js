@@ -44,6 +44,39 @@ function postOrder(root) {
   return result;
 }
 
+// BFS（不区分不同的层）  队列
+var bfs = function(root) {
+  let result = [];
+  if (!root) return result;
+  let queue = [root];
+  while (queue.length) {
+    let node = queue.shift();
+    result.push(node.val);
+    if (node.left) queue.push(node.left);
+    if (node.right) queue.push(node.right);
+  }
+  return result;
+};
+
+// 层序遍历（区分不同的层）  队列
+var levelOrder = function(root) {
+  let result = [];
+  if (!root) return result;
+  let queue = [root];
+  while (queue.length) {
+    let arr = [];
+    let n = queue.length;
+    for (let i = 0; i < n; i++) {  // 开始写成 i < queue.length 了，这样会导致一轮循环后 queue.length 发生变化。用 n 保存 queue.length，就不会变化了。
+      let node = queue.shift();
+      arr.push(node.val);
+      if (node.left) queue.push(node.left);
+      if (node.right) queue.push(node.right);
+    }
+    result.push(arr);
+  }
+  return result;
+};
+
 // 统计二叉树的结点个数
 function countNodes(root) {
   if (!root) return 0;
@@ -65,15 +98,19 @@ root.right = new TreeNode('C');
 root.right.right = new TreeNode('F');
 
 // let preResult = preOrder(root);
-// let inResult = inOrder(root);
-// let postResult = postOrder(root);
 // console.log(preResult);
+// let inResult = inOrder(root);
 // console.log(inResult);
+// let postResult = postOrder(root);
 // console.log(postResult);
+// let bfsResult = bfs(root);
+// console.log(bfsResult);
+let levelResult = levelOrder(root);
+console.log(levelResult);
 
-let n = countNodes(root);
-let level = countLevel(root);
-console.log(n);
-console.log(level);
+// let n = countNodes(root);
+// let level = countLevel(root);
+// console.log(n);
+// console.log(level);
 
 
