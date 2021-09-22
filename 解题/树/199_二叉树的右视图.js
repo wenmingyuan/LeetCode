@@ -24,6 +24,10 @@ var rightSideView = function(root) {
 };
 
 /* 答案 DFS   理解答案后自己写的   通过    和答案差不多
+  思路：
+    按照 root、right、left 的顺序遍历
+    判断当前结点是否是这一层第一个被访问的结点，如果是，就加入到结果数组
+    dfs() 函数的参数要有层数（带有层数的递归）
   参考：https://leetcode-cn.com/problems/binary-tree-right-side-view/solution/jian-dan-bfsdfs-bi-xu-miao-dong-by-sweetiee/
 */
 var rightSideView = function(root) {
@@ -32,7 +36,7 @@ var rightSideView = function(root) {
   dfs(root, level, result);
   return result;
 };
-let dfs = function(root, level, result) {
+let dfs = function(root, level, result) {  // 参数中要有层数
   if (!root) return;
   if (level > result.length) {
     result.push(root.val);
