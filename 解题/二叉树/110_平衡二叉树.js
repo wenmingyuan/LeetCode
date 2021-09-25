@@ -6,9 +6,7 @@ function TreeNode(val, left, right) {
   this.right = (right===undefined ? null : right)
 }
 
-/* 自己的思路   没通过   测试用例：[1,2,2,3,null,null,3,4,null,null,4]
-  问题在于我只确保了根结点的左右子树高度差 <= 1，但没保证根结点的子结点的左右子树高度差 <= 1
-*/
+/* 自己的思路   没通过   原因是只考虑到让根结点的左右子树高度差 <= 1，但没保证任意结点的左右子树高度差 <= 1 */
 var isBalanced = function(root) {
   if (!root) return true;
   
@@ -54,13 +52,15 @@ let height = function(root) {
   return Math.max(height(root.left), height(root.right)) + 1;
 }
 
+// -------------------------------------------------------------------------------------------------------------------
+
 /* 答案的自底向上递归    相当于后序遍历    解决了自顶向下递归会重复调用 height() 函数的问题，降低了时间复杂度  
   参考：
+  https://leetcode-cn.com/problems/balanced-binary-tree/solution/dai-ma-sui-xiang-lu-dai-ni-xue-tou-er-ch-x3bv/
   https://leetcode-cn.com/problems/balanced-binary-tree/solution/xiang-xi-tong-su-de-si-lu-fen-xi-duo-jie-fa-by-25/
-  https://leetcode-cn.com/problems/balanced-binary-tree/solution/ping-heng-er-cha-shu-by-leetcode-solution/
 */
 var isBalanced = function(root) {
-  return height !== -1;
+  return height(root) !== -1;
 }
 let height = function(root) {
   if (!root) return 0;
@@ -76,4 +76,28 @@ let height = function(root) {
   return Math.max(leftHeight, rightHeight) + 1;
 }
 
-/* 理解答案后，自己写的自底向上递归 */
+/* 自己重新思考后写的后序遍历   和答案一样    通过 
+  思路：
+    根据平衡二叉树的定义：二叉树的每个结点的左右子树的高度差不超过 1
+    确定递归单层逻辑：
+      计算左子树的高度
+      计算右子树的高度
+      若左右子树的高度差大于 1，则返回 -1（因为层数大于等于 0，所以 -1 是个特殊的值）
+      否则，返回左右子树高度的较大值 + 1
+*/
+var isBalanced = function(root) {
+  return getLevel(root) !== -1;
+}
+let getLevel = function(root) {
+  if (!root) return 0;
+
+  let leftLevel = getLevel(root.left);
+  if (leftLevel === -1) return -1;
+  
+  let rightLevel = getLevel(root.right)
+  if (rightLevel === -1) return -1;
+  
+  if (Math.abs(leftLevel - rightLevel) > 1) return -1;
+
+  return Math.max(leftLevel, rightLevel) + 1;  // 忘加 1 了...
+}
