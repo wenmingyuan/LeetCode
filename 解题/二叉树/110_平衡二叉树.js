@@ -76,4 +76,4 @@ let height = function(root) {
   return Math.max(leftHeight, rightHeight) + 1;
 }
 
-/* 自己写的 */
+/* 理解答案后，自己写的自底向上递归 */
