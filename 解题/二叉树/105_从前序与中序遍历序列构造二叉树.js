@@ -85,7 +85,7 @@ const buildTree = (preorder, inorder) => {
 
   左子树的
     前序数组的左指针：pStart + 1
-    前序数组的右指针：pStart + leftNum    leftNum 是左子树的结点个数
+    前序数组的右指针：pStart + leftNum    leftNum 是左子树的结点个数，注意必须要计算 leftNum
     中序数组的左指针：iStart
     中序数组的右指针：mid - 1             mid 是中序数组中根结点的位置
   右子树的
@@ -130,3 +130,58 @@ const buildTree = (preorder, inorder) => {
   return helper(0, preorder.length - 1, 0, inorder.length - 1);
 };
 
+// -------------------------------------------------------------------------------------------------------------------------
+
+/* 自己理解后写的   和答案差不多，把 root 的赋值语句写到 leftRoot 和 rightRoot 的下面了，使后序遍历更容易理解 */
+var buildTree = function(preorder, inorder) {
+  let n = preorder.length;
+  if (n === 0) return null;
+  
+  let mid = inorder.indexOf(preorder[0]);
+  let leftRoot = buildTree(preorder.slice(1, mid + 1), inorder.slice(0, mid));
+  let rightRoot = buildTree(preorder.slice(mid + 1), inorder.slice(mid + 1));
+  let root = new TreeNode(preorder[0], leftRoot, rightRoot);
+
+  return root;
+}
+
+/* 自己写的优化   一开始写的时候很多细节没有注意，见代码中注释  */
+var buildTree = function(preorder, inorder) {
+  let helper = function(pStart, pEnd, iStart, iEnd) {
+    if (pStart > pEnd) return null;
+
+    let mid = inorder.indexOf(preorder[pStart]);  // 一开始写成 inorder.indexOf(pStart) 了...
+    let leftNum = mid - iStart;  // leftNum 一开始计算成 mid + 1 - iStart 了...
+    let leftRoot = helper(pStart + 1, pStart + leftNum, iStart, mid - 1);
+    let rightRoot = helper(pStart + leftNum + 1, pEnd, mid + 1, iEnd);  // pEnd 和 iEnd 都错写成 n 了...
+    let root = new TreeNode(preorder[pStart], leftRoot, rightRoot);
+
+    return root;
+  }
+
+  let n = preorder.length;
+  return helper(0, n - 1, 0, n - 1);
+}
+
+/* 自己写的进一步优化 */
+var buildTree = function(preorder, inorder) {
+  let helper = function(pStart, pEnd, iStart, iEnd) {
+    if (pStart > pEnd) return null;
+
+    // let mid = inorder.indexOf(preorder[pStart]);
+    let mid = map.get(preorder[pStart]);
+    let leftNum = mid - iStart;
+    let leftRoot = helper(pStart + 1, pStart + leftNum, iStart, mid - 1);
+    let rightRoot = helper(pStart + leftNum + 1, pEnd, mid + 1, iEnd);
+    let root = new TreeNode(preorder[pStart], leftRoot, rightRoot);
+
+    return root;
+  }
+
+  let n = preorder.length;
+  let map = new Map();
+  for (let i = 0; i < n; i++) {
+    map.set(inorder[i], i);  // 一开始写成 map.set(preorder[i], i) 了...
+  }
+  return helper(0, n - 1, 0, n - 1);
+}
