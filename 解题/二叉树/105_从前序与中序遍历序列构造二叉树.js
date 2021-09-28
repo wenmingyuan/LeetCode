@@ -138,6 +138,7 @@ var buildTree = function(preorder, inorder) {
   if (n === 0) return null;
   
   let mid = inorder.indexOf(preorder[0]);
+
   let leftRoot = buildTree(preorder.slice(1, mid + 1), inorder.slice(0, mid));
   let rightRoot = buildTree(preorder.slice(mid + 1), inorder.slice(mid + 1));
   let root = new TreeNode(preorder[0], leftRoot, rightRoot);
@@ -149,9 +150,11 @@ var buildTree = function(preorder, inorder) {
 var buildTree = function(preorder, inorder) {
   let helper = function(pStart, pEnd, iStart, iEnd) {
     if (pStart > pEnd) return null;
+    // if (iStart > iEnd) return null;   // 改成 iStart > iEnd 也可以
 
     let mid = inorder.indexOf(preorder[pStart]);  // 一开始写成 inorder.indexOf(pStart) 了...
     let leftNum = mid - iStart;  // leftNum 一开始计算成 mid + 1 - iStart 了...
+
     let leftRoot = helper(pStart + 1, pStart + leftNum, iStart, mid - 1);
     let rightRoot = helper(pStart + leftNum + 1, pEnd, mid + 1, iEnd);  // pEnd 和 iEnd 都错写成 n 了...
     let root = new TreeNode(preorder[pStart], leftRoot, rightRoot);
@@ -167,10 +170,12 @@ var buildTree = function(preorder, inorder) {
 var buildTree = function(preorder, inorder) {
   let helper = function(pStart, pEnd, iStart, iEnd) {
     if (pStart > pEnd) return null;
+    // if (iStart > iEnd) return null;   // 改成 iStart > iEnd 也可以
 
     // let mid = inorder.indexOf(preorder[pStart]);
     let mid = map.get(preorder[pStart]);
     let leftNum = mid - iStart;
+    
     let leftRoot = helper(pStart + 1, pStart + leftNum, iStart, mid - 1);
     let rightRoot = helper(pStart + leftNum + 1, pEnd, mid + 1, iEnd);
     let root = new TreeNode(preorder[pStart], leftRoot, rightRoot);
