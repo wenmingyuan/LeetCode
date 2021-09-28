@@ -28,3 +28,26 @@ var getMinimumDifference = function(root) {
   dfs(root, preval);  // 开始时会用中序序列的第一个结点值减去 -Infinity，这样得到的是正无穷，可以保证差值被替换掉
   return min;
 };
+
+/* 答案的 preval 初始化值为 undefined
+  https://leetcode-cn.com/problems/minimum-absolute-difference-in-bst/solution/shou-hua-tu-jie-530-er-cha-sou-suo-shu-de-zui-xiao/
+*/
+const getMinimumDifference = (root) => {
+  let diff = Number.MAX_SAFE_INTEGER;
+  let preVal;
+
+  const inOrder = (root) => {
+    if (root == null) {
+      return;
+    }
+    inOrder(root.left);
+    if (preVal !== undefined && root.val - preVal < diff) {
+      diff = root.val - preVal;
+    }
+    preVal = root.val;
+    inOrder(root.right);
+  };
+
+  inOrder(root);
+  return diff;
+};
