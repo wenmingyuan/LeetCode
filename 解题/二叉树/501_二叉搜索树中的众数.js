@@ -104,3 +104,58 @@ var findMode = function(root) {
   return result;
 };
 
+/* 理解答案后自己用额外空间写的    通过    但这种方法没有利用二叉搜索树的性质    不推荐使用 */
+var findMode = function(root) {
+  let dfs = function(root) {
+    if (!root) return;
+    dfs(root.left);
+    let count = map.get(root.val) === undefined ? 0 : map.get(root.val);
+    map.set(root.val, count + 1);
+    dfs(root.right);
+  }
+
+  let map = new Map();
+  let max = -Infinity, result = [];
+  dfs(root);  // 一开始写成 dfs() 了... 没写参数
+  for (let e of map) {
+    if (e[1] > max) {
+      max = e[1];
+      result = [];  // 清空数组
+      result.push(e[0]);
+    }
+    else if (e[1] === max) {  // 不止一个众数
+      result.push(e[0]);
+    }
+  }
+  return result;
+}
+
+/* 理解答案后自己不用额外空间写的    一开始写错了，见代码    改后和答案差不多，区别在于答案把根结点的处理逻辑封装成函数了 */
+var findMode = function(root) {
+  let dfs = function(root) {
+    if (!root) return;
+    dfs(root.left);
+
+    if (root.val === base) {
+      count++;
+    }
+    // else if (root.val !== base) {  // 写的复杂了
+    else {
+      base = root.val;
+      count = 1;
+    }
+    if (count === maxCount) result.push(root.val);
+    else if (count > maxCount) {
+      maxCount = count;  // 忘记写这句了...
+      result = [];
+      result.push(root.val);
+    }
+
+    dfs(root.right);
+  }
+
+  let base = -Infinity, count = 0, maxCount = 0;
+  let result = [];
+  dfs(root);
+  return result;
+}
