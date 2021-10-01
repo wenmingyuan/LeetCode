@@ -26,7 +26,9 @@ var increasingBST = function(root) {
   return upRoot;
 };
 
-/* 自己的解法    反向中序遍历    用变量保存前一结点     但不是原地修改     通过 */
+// ------------------------------------------------------------------------------------------------------------------------
+
+/* 自己的解法    反向中序遍历    用变量保存前一结点     不是原地修改     通过 */
 var increasingBST = function(root) {
   let dfs = function(root) {
     if (!root) return null;
@@ -41,12 +43,38 @@ var increasingBST = function(root) {
   return newRoot;
 }
 
+/* （最推荐）参考 114_二叉树展开为链表，可以把上面自己写的反向中序遍历改为原地修改 */
+var increasingBST = function(root) {
+  let dfs = function(root) {
+    if (!root) return null;
+
+    dfs(root.right);
+    head = root;  // head 仅用于最后返回链表的第一个结点
+    root.right = pre;
+    pre = root;
+    dfs(root.left);
+    root.left = null;
+  }
+
+  let head = null, pre = null;
+  dfs(root);
+  return head;
+}
+
+// ------------------------------------------------------------------------------------------------------------------------
+
 /* 答案    先中序遍历，将中序序列保存到数组里，然后再用数组创建链表（使用 dummy 结点）     不是原地修改
   https://leetcode-cn.com/problems/increasing-order-search-tree/solution/di-zeng-shun-xu-cha-zhao-shu-by-leetcode-dfrr/
 */
 /* 比较简单，不贴代码了 */
 
-/* 答案    在中序遍历的过程中改变结点指向   原地修改     和我的反向中序遍历方法类似，不过答案是正向的正序遍历  
+/* 上面这种方法把存储的元素改为结点而不是结点值，就是原地修改了，可以参考 114_二叉树展开为链表，下方为答案
+  https://leetcode-cn.com/problems/flatten-binary-tree-to-linked-list/solution/er-cha-shu-zhan-kai-wei-lian-biao-by-leetcode-solu/
+*/
+
+// ------------------------------------------------------------------------------------------------------------------------
+
+/* 答案（推荐）    在中序遍历的过程中改变结点指向    原地修改    我写的反向中序遍历是从下往上构造链表，答案从上往下构造链表，都可以  
   还是上面的题解
 */
 var increasingBST = function(root) {
