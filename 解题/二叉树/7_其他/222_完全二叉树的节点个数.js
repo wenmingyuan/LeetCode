@@ -5,7 +5,7 @@ function TreeNode(val, left, right) {
 }
 
 
-/* 自己的思路   用 O(n) 的时间，遍历全部结点   通过  */
+/* 自己的思路     前序遍历计数      通过  */
 // var countNodes = function(root) {
 //   let n = 0;
 //   let helper = function(root) {
@@ -19,7 +19,7 @@ function TreeNode(val, left, right) {
 // }
 
 
-/* 答案   比我的代码简介很多    适用于任何二叉树
+/* 答案    后序遍历    很简洁    适用于任何二叉树
   参考：https://leetcode-cn.com/problems/count-complete-tree-nodes/solution/chang-gui-jie-fa-he-ji-bai-100de-javajie-fa-by-xia/
 */
 // var countNodes = function(root) {

@@ -6,7 +6,6 @@ function TreeNode(val, left, right) {
   this.right = (right===undefined ? null : right)
 }
 
-
 /* 自己的解法   没通过   测试用例：[-9,-3,2,null,4,4,0,-6,null,-5]   预期输出：-11   实际输出：-5 */
 var sumOfLeftLeaves = function(root) {
   let dfs = function(root) {
@@ -43,7 +42,7 @@ var sumOfLeftLeaves = function(root) {
   return sum;
 };
 
-/* 答案要更简洁
+/* 答案更简洁
   参考评论区：https://leetcode-cn.com/problems/sum-of-left-leaves/solution/zuo-xie-zi-zhi-he-by-leetcode-solution/
 */
 var sumOfLeftLeaves = function(root) {

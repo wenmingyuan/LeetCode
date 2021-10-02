@@ -5,8 +5,8 @@
 */
 var removeDuplicates = function(nums) {
   if (nums.length === 0) return 0;  // 答案多了这句话，也正是我没有注意到的特殊情况
-  let left = 1;
-  for (let right = 1; right < nums.length; right++) {
+  let left = 1;  // 注意 left 起始位置，一开始写的时候想了很久
+  for (let right = 1; right < nums.length; right++) {  // 注意 right 起始位置，一开始写的时候想了很久
     if (nums[right] > nums[right - 1]) {
       nums[left] = nums[right];
       left++;
