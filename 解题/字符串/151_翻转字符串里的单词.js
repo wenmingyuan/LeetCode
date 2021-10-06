@@ -1,12 +1,10 @@
 // https://leetcode-cn.com/problems/reverse-words-in-a-string/
 
-/* 自己的思路     感觉要遍历很多次...   看答案了
-  1. 把所有的空格变成单个空格
-  2. 去除最前面和最后面的空格
-  3. 把单词顺序反转
-*/
+/* 最近重做了这道题 */
 
-/* 答案   调用 API
+/* 自己的思路      调用 API      没有想其他方法 */
+
+/* 答案     调用 API     不是个好的做法
   1. 先用 trim() 去除字符串开头和末尾的空格
   2. 再用 split(/\s+/) 把字符串变成数组
   3. 反转数组
@@ -17,65 +15,70 @@ var reverseWords = function(s) {
   return s.trim().split(/\s+/).reverse().join(' ');
 };
 
-/* 理解答案后自己写的    注意 split(/\s+/) 不应该加引号   */
-var reverseWords = function(s) {
-  return s.trim().split(/\s+/).reverse().join(' ');
-}
+// --------------------------------------------------------------------------------------------------------------------
 
-/* 答案   双指针
+/* 答案     双指针
+
   思路：
-    1. 右指针和左指针都指向字符串末尾
-    2. 右指针从后向前遍历字符串，当右指针指向的字符不为空格时，左指针指向右指针，结束遍历
-    3. 左指针从后向前遍历字符串，当左指针指向的字符为空格时，将 s[left + 1: right + 1] + 空格 拼接到结果字符串，右指针指向左指针，结束遍历
-    4. 回到 2
-  参考：https://leetcode-cn.com/problems/reverse-words-in-a-string/solution/151-fan-zhuan-zi-fu-chuan-li-de-dan-ci-j-zle0/
+    1. right 和 left 都指向字符串末尾
+    2. right 逆向遍历字符串，当 right 指向的字符不为空格时，left 指向 right，结束遍历
+    3. left 逆向遍历字符串，当 left 指向的字符为空格时，将 left 和 right 之间的字符 + 空格 拼接到结果字符串
+    4. right 指向 left
+    5. 回到 2
+  
+  https://leetcode-cn.com/problems/reverse-words-in-a-string/solution/151-fan-zhuan-zi-fu-chuan-li-de-dan-ci-j-zle0/
+  https://leetcode-cn.com/problems/reverse-words-in-a-string/solution/151fan-zhuan-zi-fu-chuan-li-de-dan-ci-sh-7naj/
 */
-var reverseWords = function(s) {
-  let r = s.length - 1, l = r, res = "";
+/* 代码感觉有些复杂，就不贴了，按自己的风格写就行了 */
 
-  while (l >= 0) {
-      //先找到单词的尾部
-      while (s[r] === " ") {
-          r--;
-      }
-      l = r;
-      //给上次单词加空格，排除第一次
-      if (l >= 0 && res) {
-          res += " ";
-      }
-      //再找到单词的头部
-      while (s[l] && s[l] !== " ") {
-          l--;
-      }
-      //遍历单词并添加
-      for (let i = l + 1, j = r; i <= j; i++) {
-          res += s[i];
-      }
-      //跳到下一个单词
-      r = l;
-  }
-
-  return res;
-}
-
-/* 没太看懂答案代码 ，大概理解答案后自己写的  通过 
-  思路和上面写的差不多，考虑了 2 种特殊情况，作为循环终止条件：字符串开头有连续空格   字符串开头没有空格
+/* 理解答案后自己写的双指针
+  判断条件一开始把自己绕晕了，实际上唯一的特殊情况就是字符串最左边是空白
 */
+/* 下面的代码写了很多注释 */
 var reverseWords = function(s) {
   let right = s.length - 1, left = right;
-  let result = '';
+  let arr = [];
 
-  while (right !== -1) {  // left, right 指向同一个地方，判断一个就行
-    while (s[right] === ' ' && right !== -1) right--;
+  while (left >= 0) {  // right >= 0 也行
+    while (s[right] === ' ') right--;  // right === 0 时，s[right] === undefined，自动终止循环
     left = right;
-    
-    while (s[left] !== ' ' && left !== -1) left--;
-    if (result && left !== right)  result += ' ';  // result 的第一个单词前不加空格，left === right 时（都等于 -1）不加空格
-    for (let i = left + 1; i < right + 1; i++) {  // 相当于 substring()
-      result += s[i];
+    while (left >= 0 && s[left] !== ' ') left--;  // 要保证 left >= 0，否则会无限循环
+
+    // 字符放到数组里时，可以一个字符一个字符地放，也可以用后面写的 substring()
+    // for (let i = left + 1; i <= right; i++) {
+    //   arr.push(s[i]);
+    // }
+    // if (left !== right) arr.push(' ');
+
+    if (left !== right) {  // 排除最左边是空白的情况，如果不判断，会多执行一次 arr.push(' ')
+      arr.push(s.substring(left + 1, right + 1));  // substring() 要慎用，当起始位置大于终止位置时，相当于这两个参数互换位置
+      arr.push(' ');
+    }
+
+    right = left;
+  }
+
+  arr.pop();  // 去掉最后一个空格
+  return arr.join('');  // 注意要填参数
+}
+/* 下面的代码把注释去掉了 */
+var reverseWords = function(s) {
+  let right = s.length - 1, left = right;
+  let arr = [];
+
+  while (left >= 0) {
+    while (s[right] === ' ') right--;
+    left = right;
+    while (left >= 0 && s[left] !== ' ') left--;
+    if (left !== right) {
+      arr.push(s.substring(left + 1, right + 1));
+      arr.push(' ');
     }
     right = left;
   }
 
-  return result;
+  arr.pop();
+  return arr.join('');
 }
+
+/* 这题需要多练，能加强对于指针边界的控制 */
