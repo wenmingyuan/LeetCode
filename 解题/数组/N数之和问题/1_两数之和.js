@@ -36,7 +36,7 @@
 //   return result;
 // }
 
-/* 答案
+/* 答案      哈希表     时间复杂度 O(n)
 
   思路：
     由于题目不允许使用同一个索引位置的元素 2 次，所以不能像我的思路一样，把数组的元素一下子全部放到 Map 中
@@ -75,4 +75,42 @@ var twoSum = function(nums, target) {
   }
 
   return [];  // 一开始没写这句，因为这道题一定会从上面 for 循环中 return，但为了程序的完整性，还是加上这句比较好
+}
+
+// --------------------------------------------------------------------------------------------------------------
+
+/* 答案      双指针     时间复杂度 O(nlogn)
+
+  思路：
+    先复制一份数组，因为之后要查下标
+    将原数组排序
+    设置头尾两个指针，从外往内移动
+      当两数之和等于 target 时，退出循环
+    在复制的数组中查找这两个数的索引，注意要排除掉索引相同的情况
+  
+  https://leetcode-cn.com/problems/two-sum/solution/1liang-shu-zhi-he-shuang-zhi-zhen-by-hex-2wuk/
+*/
+/* 代码是 C++ 的，不搬过来了 */
+
+/* 理解答案后自己写的      通过 */
+var twoSum = function(nums, target) {
+  let numsBak = nums.slice();  // 深拷贝
+  nums.sort(function(x, y) {return x - y});
+
+  let i = 0, j = nums.length - 1;
+  let result = [];
+
+  while (i < j) {
+    let sum = nums[i] + nums[j];
+    if (sum === target) {
+      index1 = numsBak.indexOf(nums[i]);
+      index2 = numsBak.lastIndexOf(nums[j]);  // 使用 lastIndexOf() 从后往前找，避免找到 2 个相同的索引
+      result.push(index1, index2);
+      break;  // 忘写了...
+    }
+    else if (sum < target) i++;
+    else j--;
+  }
+
+  return result;
 }
