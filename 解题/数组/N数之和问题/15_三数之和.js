@@ -26,10 +26,16 @@
       b 指针指向 a + 1，c 指针指向末尾
       b、c 从两头向中间走，比较 nums[a] + nums[b] + nums[c] 和 0 的大小关系
       注意跳过 nums[b] 连续相等的情况，因为要去重
+
+  细节：
+    注意去重条件的写法：
+      if (nums[a] !== nums[a - 1])
+      if (b === a + 1 || nums[b] !== nums[b - 1])
     
-  思路可参考，但它的代码我觉得自己写不出来：https://leetcode-cn.com/problems/3sum/solution/dai-ma-sui-xiang-lu-dai-ni-gao-ding-ha-x-w6pp/
+  思路可参考下方代码随想录的题解，我感觉自己不会按照他的代码写，还是按自己的风格写就好
+  https://leetcode-cn.com/problems/3sum/solution/dai-ma-sui-xiang-lu-dai-ni-gao-ding-ha-x-w6pp/
 */
-/* 大部分题解的代码都较难理解，所以不贴了，重点是掌握思路，看自己下面写的代码就行 */
+/* 大部分题解的代码都较难理解，所以不贴了，重点是掌握思路，看自己写的代码就行 */
 
 /* 自己写的双指针    通过 */
 var threeSum = function(nums) {
