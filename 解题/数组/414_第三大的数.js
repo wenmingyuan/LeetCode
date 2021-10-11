@@ -1,3 +1,5 @@
+// https://leetcode-cn.com/problems/third-maximum-number/
+
 /* 自己的思路   先排序，再遍历   通过   */
 // var thirdMax = function(nums) {
 //   nums.sort((x, y) => y - x);  // 降序排列

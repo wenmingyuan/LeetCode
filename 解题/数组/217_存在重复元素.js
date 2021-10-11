@@ -1,3 +1,5 @@
+// https://leetcode-cn.com/problems/contains-duplicate/
+
 /* 自己的解法 直接用 Set 就是这么不讲道理...  通过  */
 // var containsDuplicate = function(nums) {
 //   let set = new Set(nums);

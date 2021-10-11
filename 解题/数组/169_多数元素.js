@@ -1,3 +1,5 @@
+// https://leetcode-cn.com/problems/majority-element/
+
 /* 自己的思路  先对数组排序，再取数组中间元素  通过   但时间复杂度、空间复杂度不满足题目要求  */
 // var majorityElement = function(nums) {
 //   nums.sort((x, y) => x - y);
